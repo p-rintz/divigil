@@ -1,18 +1,19 @@
 #!/usr/bin/python3
 
 #  Copyright (c) 2019. Philipp Rintz
-#  pylinuxiso is free software: you can redistribute it and/or modify
+#  Divigil is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  pylinuxiso is distributed in the hope that it will be useful,
+#  Divigil is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 import getopt
 import importlib
@@ -78,6 +79,7 @@ def mainloop():
                     utils.debug(1, 'We already have the current version for %s.' % i, utils.whoami())
                 else:
                         dlinfo = download.download(dllink, dlpath)
+                        # utils.linkinfo may return an Exception with HTTP Error code. Dont update current_version then.
                         if not utils.is_number(dlinfo):
                             utils.config.set(i, 'current_version', file_name)
                             utils.debug(2, 'Current_version is: ' + utils.config.get(i, 'current_version'), utils.whoami())
