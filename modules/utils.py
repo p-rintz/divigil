@@ -15,11 +15,13 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import configparser
 import sys
+
+import configparser
 import urllib.error
 import urllib.request
 from pathlib import Path
+from re import sub
 
 configdir = str(Path.home()) + '/.config/divigil/'
 configfile = configdir + 'config'
@@ -52,6 +54,8 @@ def getpagedata(url):
 
 def linkinfo(url):
     filename = file_name(url)
+    if "http" in url:
+        url = sub('https?://', '', url)
     try:
         url_https = 'https://' + url
         info = urllib.request.urlopen(url_https)
@@ -78,6 +82,19 @@ def debug(debugfunclevel, msg, who):
     if debuglevel >= debugfunclevel:
         print('Debug[' + str(debugfunclevel) + '][' + str(who) + ']: ' + msg)
 
+
+def chkcalc(chksum, filename):
+    import hashlib
+    hash_md5 = hashlib.md5()
+    with open(filename, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    if hash_md5.hexdigest() == chksum:
+        debug(4, 'Checksum checks out.', whoami())
+        return 1
+    else:
+        print('Checksum does not check out.')
+        return 0
 
 def is_number(n):
     return str(n).replace('.', '', 1).isdigit()

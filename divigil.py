@@ -15,14 +15,14 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+import sys
+import time
+
 import getopt
 import importlib
 import os
-import sys
-import time
-from datetime import datetime
-
 from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import datetime
 
 from modules import download, utils
 
@@ -79,12 +79,19 @@ def mainloop():
                     utils.debug(1, 'We already have the current version for %s.' % i, utils.whoami())
                 else:
                         dlinfo = download.download(dllink, dlpath)
+                        if hasattr(create, 'chkurl'):
+                            utils.debug(3, 'Starting checksum check for %s' % linkprovider, utils.whoami())
+                            chkresult = create.chksum(file_name, dlpath)
                         # utils.linkinfo may return an Exception with HTTP Error code. Dont update current_version then.
-                        if not utils.is_number(dlinfo):
+                        if not utils.is_number(dlinfo) and chkresult == 1:
                             utils.config.set(i, 'current_version', file_name)
                             utils.debug(2, 'Current_version is: ' + utils.config.get(i, 'current_version'), utils.whoami())
                             with open(utils.configfile, 'w') as configfile:
                                 utils.config.write(configfile)
+                        elif utils.is_number(dlinfo):
+                            print('Download failed with HTTP error code: %s' % dlinfo)
+                        else:
+                            print('Download failed due to checksum mismatch.')
             else:
                 utils.debug(4, 'No download link found for %s' % i, utils.whoami())
         else:
