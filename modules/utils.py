@@ -21,7 +21,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-configdir = str(Path.home()) + '/.config/digivil/'
+configdir = str(Path.home()) + '/.config/divigil/'
 configfile = configdir + 'config'
 config = configparser.ConfigParser()
 config.optionxform = str
