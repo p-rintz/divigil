@@ -91,10 +91,11 @@ def chkcalc(chksum, filename):
             hash_md5.update(chunk)
     if hash_md5.hexdigest() == chksum:
         debug(4, 'Checksum checks out.', whoami())
-        return 1
+        return 'Success'
     else:
         print('Checksum does not check out.')
-        return 0
+        return 'Fail'
+
 
 def is_number(n):
     return str(n).replace('.', '', 1).isdigit()

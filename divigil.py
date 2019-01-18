@@ -59,6 +59,7 @@ def mainloop():
         downloadcfg = str(utils.config.get(i, 'download'))
         file_regex = str(utils.config.get(i, 'file_regex'))
         linkprovider = str(utils.config.get(i, 'link_provider'))
+        chkresult = ''
         if str(downloadcfg) == '1':
             try:
                 create = importlib.import_module(linkprovider)
@@ -83,7 +84,7 @@ def mainloop():
                             utils.debug(3, 'Starting checksum check for %s' % linkprovider, utils.whoami())
                             chkresult = create.chksum(file_name, dlpath)
                         # utils.linkinfo may return an Exception with HTTP Error code. Dont update current_version then.
-                        if not utils.is_number(dlinfo) and chkresult == 1:
+                        if not utils.is_number(dlinfo) and chkresult is not 'Fail':
                             utils.config.set(i, 'current_version', file_name)
                             utils.debug(2, 'Current_version is: ' + utils.config.get(i, 'current_version'), utils.whoami())
                             with open(utils.configfile, 'w') as configfile:
