@@ -29,8 +29,6 @@ Or simply copy the project folder to wherever you want.
 
 Lastly, you might want to add this to your preferred init system and run it as a daemon.
 
-An example systemd service file is included in the examples folder.
-
 ## License
 
 This project is licensed under the GPL-3.0 License - see the [LICENSE.md](LICENSE.md) file for details
