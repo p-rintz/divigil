@@ -1,7 +1,7 @@
 # Divigil - Distro Vigil
 
 Download and keep watch (vigil) for new releases of your favourite distributions. Supports plugins to search for distributions from extra sources. 
-Currently supported: Distrowatch.com
+Currently supported: Distrowatch.com, Debian (also including checking checksum)
 
 ## Getting Started
 
