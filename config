@@ -18,8 +18,10 @@ download = 1
 
 ####
 # This a block for Fedora.
-# Divigil will look for a while with the regular experession defined there.
+# Divigil will look for a file with the regular experession defined there.
 # download = 1 enables the download, 0 will disable.
+# It is needed to set current_version to 0 when adding a new ISO block.
+####
 [fedora]
 current_version = 0
 file_regex = Fedora-Server-.*?-x86_64.*?\.iso
