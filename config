@@ -1,0 +1,37 @@
+####
+# Where to download the ISO's to, as well as the debug level and how often to search for updates.
+####
+[mainconfig]
+folder = /where/to/put/ISO/
+debug = 3
+interval = 5
+interval_denomination = hours
+
+####
+# Example for a distribution that is already downloaded through Divigil. 
+####
+[ubuntu]
+current_version = ubuntu-18.10-live-server-amd64.iso
+file_regex = ubuntu-.*?-live-server-amd64.iso
+link_provider = distrowatch
+download = 1
+
+####
+# This a block for Fedora.
+# Divigil will look for a while with the regular experession defined there.
+# download = 1 enables the download, 0 will disable.
+[fedora]
+current_version = 0
+file_regex = Fedora-Server-.*?-x86_64.*?\.iso
+link_provider = distrowatch
+download = 1
+
+####
+# Example for a different link provider
+# Debian has its own plugin as Debian is not often updated on Distrowatch.
+####
+[debian]
+current_version = 0
+file_regex = debian-.{,7}-amd64-netinst\.iso
+link_provider = debian
+download = 1

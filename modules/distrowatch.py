@@ -41,7 +41,11 @@ def link(section, file_regex, curversion):
     match = regex(url, file_regex)
     if match:
         isolink = cleanuplink(match)
-        meta, url = utils.linkinfo(isolink)
+        try:
+            meta, url = utils.linkinfo(isolink)
+        except Exception as e:
+            utils.debug(5, "Error %s" % e, utils.whoami())
+            return
         filename = utils.file_name(url)
         if meta.get('Content-Type').split(';')[0] == 'text/html':
             print('Download link for %s is an intermediary website.' % filename)

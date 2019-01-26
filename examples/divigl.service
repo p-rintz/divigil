@@ -1,0 +1,15 @@
+[Unit]
+Description=Divigil distribution downloader
+After=network.target
+
+[Service]
+Type=simple
+User=exampleuser
+Environment="PYTHONUNBUFFERED=TRUE"
+ExecStart=/usr/bin/python3 /path/to/divigil.py --config=/path/to/config
+TimeoutStopSec=5
+KillMode=process
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target

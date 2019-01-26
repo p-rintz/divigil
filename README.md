@@ -25,9 +25,15 @@ python setup.py install
 
 Or simply copy the project folder to wherever you want.
 
+Now you will want to configure divigil. You can have a look in the config file.
+The regular expressions are python regex. 
+You can use websites such as https://pythex.org to construct a regular expression that works with whatever ISO you are trying to download.
+Be sure to at least set the download folder to wherever you want divigil to download to.
+
 ## Deployment
 
 Lastly, you might want to add this to your preferred init system and run it as a daemon.
+An example systemd service file is included in the examples folder.
 
 ## License
 
